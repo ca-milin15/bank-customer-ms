@@ -1,0 +1,27 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /api/pichincha/bank
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/customer
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: bank-customer-ms
+  amqp:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    bank-exchange-new-customer: bank.exchange.new.customer
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
