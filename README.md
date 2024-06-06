@@ -13,7 +13,7 @@ create table tbl_customer(
     name varchar(100) not null,
     gender char(1) not null,
     age int not null,
-    identification varchar(100) not null,
+    identification varchar(100) not null unique,
     address varchar(100) not null,
     phone varchar(25) not null,
     password varchar(200) not null,

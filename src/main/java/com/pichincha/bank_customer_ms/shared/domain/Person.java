@@ -24,7 +24,10 @@ public abstract class Person {
     String name;
     String gender;
     int age;
+
+    @Column(name= "identification", unique = true)
     String identification;
+
     String address;
     String phone;
 

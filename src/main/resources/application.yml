@@ -25,3 +25,10 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+---
+
+system-properties:
+  messages:
+    error:
+      customer-create-error: "Error al crear el cliente."
+      customer-create-detailed-error: "Error al crear el cliente. Se ha presentado un error de integridad de datos."

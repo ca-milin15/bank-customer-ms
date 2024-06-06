@@ -7,6 +7,7 @@ import com.pichincha.bank_customer_ms.customer.infrastructure.controller.dto.Cus
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class CustomerController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public CustomerDTO userCreateProcess(@RequestBody CustomerDTO customerDTO) throws JsonProcessingException {
+    public CustomerDTO userCreateProcess(@RequestBody @Validated CustomerDTO customerDTO) throws JsonProcessingException {
         return customerCreateUseCase.executeCommand(customerDTO);
     }
 }
