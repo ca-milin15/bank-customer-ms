@@ -1,5 +1,6 @@
 package com.pichincha.bank_customer_ms.shared.infrastructure.config;
 
+import com.pichincha.bank_customer_ms.shared.application.exceptions.EntityNotFoundRuntimeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,5 +25,11 @@ public class ControllerAdvice {
         var detailAsString = Arrays.stream(detail).map(String::valueOf).collect(Collectors.joining());
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, detailAsString);
     }
+
+    @ExceptionHandler(EntityNotFoundRuntimeException.class)
+    public ProblemDetail entityNotFoundRuntimeException(EntityNotFoundRuntimeException ex, WebRequest request){
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
 
 }

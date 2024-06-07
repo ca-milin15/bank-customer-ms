@@ -30,6 +30,8 @@ public class SystemPropertiesConfig {
         public static class Error {
             String customerCreateDetailedError;
             String customerCreateError;
+            String entityNotFoundError;
+            String customerDeleteError;
         }
     }
 }
