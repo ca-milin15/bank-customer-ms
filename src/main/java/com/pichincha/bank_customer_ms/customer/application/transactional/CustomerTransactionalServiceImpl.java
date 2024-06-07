@@ -3,6 +3,7 @@ package com.pichincha.bank_customer_ms.customer.application.transactional;
 import com.pichincha.bank_customer_ms.customer.domain.Customer;
 import com.pichincha.bank_customer_ms.customer.infrastructure.repository.CustomerRepository;
 import com.pichincha.bank_customer_ms.shared.application.exceptions.BusinessRulesRuntimeException;
+import com.pichincha.bank_customer_ms.shared.application.exceptions.EntityNotFoundRuntimeException;
 import com.pichincha.bank_customer_ms.shared.infrastructure.config.SystemPropertiesConfig;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,6 +34,27 @@ public class CustomerTransactionalServiceImpl implements CustomerTransactionalSe
                     e.getMessage());
             throw new BusinessRulesRuntimeException(
                     systemPropertiesConfig.getMessages().getError().getCustomerCreateError());
+        }
+    }
+
+    @Override
+    public Customer customerFind(String identification) {
+        return customerRepository.findByIdentification(identification)
+                .orElseThrow(() -> new EntityNotFoundRuntimeException(String.format(
+                        systemPropertiesConfig.getMessages().getError().getEntityNotFoundError(), identification)));
+    }
+
+    @Override
+    public boolean customerDelete(String identification) {
+        try {
+            var customer = customerFind(identification);
+            customerRepository.delete(customer);
+            return true;
+        } catch (DataIntegrityViolationException e) {
+            log.error("CustomerTransactionalServiceImpl.customerDelete Exception {} ",
+                    e.getMessage());
+            throw new BusinessRulesRuntimeException(
+                    systemPropertiesConfig.getMessages().getError().getCustomerDeleteError());
         }
     }
 }

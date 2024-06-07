@@ -32,3 +32,5 @@ system-properties:
     error:
       customer-create-error: "Error al crear el cliente."
       customer-create-detailed-error: "Error al crear el cliente. Se ha presentado un error de integridad de datos."
+      entity-not-found-error: "La entidad con el valor: %s no fue encontrado."
+      customer-delete-error: "Se produjo un error intentando eliminar el registro."
